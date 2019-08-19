@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import exception.custom.MistakeInJsonException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -108,6 +110,11 @@ public class TShirtServiceImpl implements TShirtService {
     }
 
     @Override
+    public Page<TShirt> getTShirtsPaged(Pageable pageable) {
+        return tShirtRepository.findAll(pageable);
+    }
+
+    @Override
     public void createExcelFromJson(String json) {
         Type listType = new TypeToken<LinkedList<TShirt>>(){}.getType();
 
@@ -124,6 +131,11 @@ public class TShirtServiceImpl implements TShirtService {
             throw new MistakeInJsonException(json);
         }
 
+    }
+
+    @Override
+    public Page<TShirt> findAllBySizeDiff(String size, Pageable pageable) {
+        return  tShirtRepository.findAllBySizeDiff(size, pageable);
     }
 
 }

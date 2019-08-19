@@ -76,7 +76,7 @@ public class ExcelPOIHelper {
             final int numberOfFields = objects.get(0).getClass().getDeclaredFields().length;
             final int numberOfObjects = objects.size();
 
-            for (int j = 0; j < objects.size(); j++) {
+            for (int j = 0; j < numberOfObjects; j++) {
                 sheet.createRow(j + 1);
             }
 
