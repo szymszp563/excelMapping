@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
 @SpringBootApplication
@@ -27,10 +28,16 @@ public class Excel2Application {
         String path = currDir.getAbsolutePath();
         String fileLocation = path.substring(0, path.length() - 1) + "mens RES t-shirts 2011-08-23 v1.xls";
 
-
         TShirtService tShirtService = (TShirtService)ctx.getBean(TShirtService.class);
 
         LinkedList<TShirt> tShirts = tShirtService.mapAllTShirtsToObjectsAndSaveFromFile(fileLocation);
+        File xlsDir = new File("XLStoConvert");
+        try {
+            excelPOIHelper.generateClassesFromFolder(xlsDir);
+            excelPOIHelper.generateClass(fileLocation);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //String jsonToSend = tShirtService.createJsonToSend(fileLocation);
 

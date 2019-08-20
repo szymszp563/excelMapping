@@ -69,7 +69,7 @@ public class TShirtServiceImpl implements TShirtService {
                             .stream()
                             .noneMatch(v -> v.length() <= 0))
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
+//            excelFileWithoutEmptyRows.re
             excelFileWithoutEmptyRows.remove(0);//removing headers
             excelFileWithoutEmptyRows.forEach((k, v) -> {
                 TShirt tShirt = TShirt.builder()
